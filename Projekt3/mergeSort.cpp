@@ -1,4 +1,3 @@
-#include <iostream>
 #include "mergeSort.h"
 
 void sortowanie::scalanie(int tab[], int lewa, int srodek, int prawa) {
