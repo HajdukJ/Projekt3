@@ -1,33 +1,43 @@
 #include "mergeSort.h"
 
 void sortowanie::scalanie(int tab[], int lewa, int srodek, int prawa) {
-	int x = lewa;   // <--- Poczatek lewej czesci tablicy
-	int y = srodek + 1;   // <--- Poczatek prawej czesci tablicy
-	int i = lewa;   // <--- Miejsce w tablicy, gdzie wstawimy posortowany element
-	int* pomocnicza = new int[prawa - lewa + 1];   // <--- Pomocnicza tablica, ktora bedzie przechowywac elementy do posortowania
-	for (int j = lewa; j <= prawa; j++) {
-		pomocnicza[j - lewa] = tab[j];   // <--- Kopiowanie danych z tablicy do tablicy pomocniczej
+	int indeksLewa = lewa;   // <--- Poczatek lewej czesci tablicy
+	int indeksPrawa = srodek + 1;   // <--- Poczatek prawej czesci tablicy
+	int indeksPosortowany = lewa;   // <--- Miejsce w tablicy, gdzie wstawimy posortowany element
+	int rozmiarLewegoPodzbioru = srodek - lewa + 1;   // <--- Rozmiar lewej czesci
+	int rozmiarPrawegoPodzbioru = prawa - srodek;   // <--- Rozmiar prawej czesci
+	int* lewyPodzbior = new int[rozmiarLewegoPodzbioru];   // <--- Pomocnicza tablica dla lewej czesci
+	int* prawyPodzbior = new int[rozmiarPrawegoPodzbioru];   // <--- Pomocnicza tablica dla prawej czesci
+	for (int j = 0; j < rozmiarLewegoPodzbioru; j++) {
+		lewyPodzbior[j] = tab[lewa + j];   // <--- Kopiowanie lewej czesci do lewego podzbioru
+	}
+	for (int j = 0; j < rozmiarPrawegoPodzbioru; j++) {
+		prawyPodzbior[j] = tab[srodek + 1 + j];   // <--- Kopiowanie prawej czesci do prawego podzbioru
 	}
 	/// Scalanie elementow z lewej oraz prawej czesci tablicy
-	while (x <= srodek) {   // <--- Dopoki elementy sa w lewej czesci tablicy
-		if (y > prawa) {   // <--- Jesli prawa czesc jest pusta
-			tab[i++] = pomocnicza[x - lewa];   // <--- Przenosimy elementy z lewej czesci do glownej tablicy
-			x++;   // <--- Nastepnie przechodzimy do nastepnego elementu w lewej czesci
+	while (indeksLewa <= srodek && indeksPrawa <= prawa) {   // <--- Dopoki elementy sa w lewej czesci tablicy oraz w prawej
+		int wartoscLewa = lewyPodzbior[indeksLewa - lewa];   // <--- Pobiera wartosc elementu z lewej tablicy
+		int wartoscPrawa = prawyPodzbior[indeksPrawa - srodek - 1];   // <--- Pobiera wartosc elementu z prawej tablicy
+		if (wartoscLewa <= wartoscPrawa) {   // <--- Jesli element z lewej jest mniejsz lub rowny prawemu
+			tab[indeksPosortowany] = wartoscLewa;   // <--- Element z lewej wstawia do glownej tablicy
+			indeksLewa++;   // <--- Przechodzi do kolejnego elementu w lewej tablicy
 		}
-		else if (pomocnicza[x - lewa] <= pomocnicza[y - lewa]) {   // <--- Jesli element znajdujacy sie po lewej czesci jest mniejszy albo rowny prawemu
-			tab[i++] = pomocnicza[x - lewa];   // <--- Przenosimy mniejszy element z lewej czesci tablicy do glownej
-			x++;   // <--- Nastepnie przechodzimy do nastepnego elementu w lewej czesci
+		else {
+			tab[indeksPosortowany] = wartoscPrawa;   // <--- W przeciwnym razie wstawia element z prawej czesci do glownej tablicy
+			indeksPrawa++;   // <--- Przechodzi do kolejnego elementu w prawej tablicy
 		}
-		else {   // <--- W przeciwnym wypadku, jesli element z prawej czesci tablicy jest mniejszy 
-			tab[i++] = pomocnicza[y - lewa];   // <--- Przenosimy ten mniejszy element z prawej czesci tablicy do glownej
-			y++;   // <--- Przechodzimy do nastepnego elementu, ktory jest w prawej czesci
-		}
+		indeksPosortowany++;   // <--- Przechodzi do kolejnego elementu w glownej tablicy
 	}
-	while (y <= prawa) {   // <--- Dopoki elementy sa w prawej czesci tablicy
-		tab[i++] = pomocnicza[y - lewa];   // <--- Przenosimy elementy, ktore pozostaly w prawej czesci tablicy
-		y++;   // <--- Przechodzimy do nastepnego elementu w prawej czesci
+	while (indeksLewa <= srodek) {   // <--- Dopoki elementy sa w lewej czesci tablicy
+		tab[indeksPosortowany++] = lewyPodzbior[indeksLewa - lewa];   // <--- Przenosimy elementy, ktore pozostaly w lewej czesci tablicy
+		indeksLewa++;   // <--- Przechodzimy do nastepnego elementu w lewej czesci
 	}
-	delete[] pomocnicza;   // <--- Zwolnienie pamieci dla pomocniczej tablicy
+	while (indeksPrawa <= prawa) {   // <--- Dopoki elementy sa w prawej czesci tablicy
+		tab[indeksPosortowany++] = prawyPodzbior[indeksPrawa - srodek - 1];   // <--- Przenosimy elementy, ktore pozostaly w prawej czesci tablicy
+		indeksPrawa++;   // <--- Przechodzimy do nastepnego elementu w prawej czesci
+	}
+	delete[] lewyPodzbior;   // <--- Zwolnienie pamieci dla pomocniczej tablicy lewej
+	delete[] prawyPodzbior;   // <--- Zwolnienie pamieci dla pomocniczej tablicy prawej
 };
 void sortowanie::sortowanie_przez_scalanie(int tab[], int lewa, int prawa) {
 	if (lewa >= prawa) {   // <--- Jesli nie ma juz elementow do sortowania, zawiera tylko jeden element
