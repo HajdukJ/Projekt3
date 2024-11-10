@@ -55,3 +55,35 @@ TEST(Sortowanie_przez_scalanie, Sortowanie_ujemne_i_dodatnie) {
 		EXPECT_EQ(tab[i], tab_oczekiwana[i]);
 	}
 }
+// dopisac metody !!!!!!!!!!!!!!!!!
+TEST(Sortowanie_przez_scalanie, Obsluga_pustej_tablicy) {
+	;
+}
+
+TEST(Sortowanie_przez_scalanie, Tablica_jednoelementowa) {
+	;
+}
+
+TEST(Sortowanie_przez_scalanie, Sortowanie_z_duplikatami) {
+	;
+}
+
+TEST(Sortowanie_przez_scalanie, Sortowanie_ujemnej_z_duplikatami) {
+	;
+}
+
+TEST(Sortowanie_przez_scalanie, Sortowanie_z_duplikatami_ujemnymi_dodatnimi) {
+	;
+}
+
+TEST(Sortowanie_przez_scalanie, Sortowanie_tablicy_z_dwoma_elementami) {
+	;
+}
+
+TEST(Sortowanie_przez_scalanie, Sortowanie_tablicy_100_elementowej) {
+	;
+}
+
+TEST(Sortowanie_przez_scalanie, Sortowanie_tablicy_100_elementowej_z_ujemnymi_dodatduplikatami) {
+	;
+}
