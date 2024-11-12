@@ -61,23 +61,55 @@ TEST(Sortowanie_przez_scalanie, Obsluga_pustej_tablicy) {
 }
 
 TEST(Sortowanie_przez_scalanie, Tablica_jednoelementowa) {
-	;
+	int tab[] = { 5 };
+	int n = 1;
+	sortowanie sort;
+	sort.sortowanie_przez_scalanie(tab, 0, n - 1);
+	EXPECT_EQ(tab[0], 5);
 }
 
 TEST(Sortowanie_przez_scalanie, Sortowanie_z_duplikatami) {
-	;
+	int tab[] = { 72, 18, 19, 25, 25, 18, 4, 102 };
+	int n = 8;
+	sortowanie sort;
+	sort.sortowanie_przez_scalanie(tab, 0, n - 1);
+	int tab_oczekiwana[] = { 4, 18, 18, 19, 25, 25, 72, 102 };
+	for (int i = 0; i < n; i++) {
+		EXPECT_EQ(tab[i], tab_oczekiwana[i]);
+	}
 }
 
 TEST(Sortowanie_przez_scalanie, Sortowanie_ujemnej_z_duplikatami) {
-	;
+	int tab[] = { -1, -5, -1, -1, -18, -3, -27, -4, -4, -5 };
+	int n = 10;
+	sortowanie sort;
+	sort.sortowanie_przez_scalanie(tab, 0, n - 1);
+	int tab_oczekiwana[] = { -27, -18, -5, -5, -4, -4, -3, -1, -1, -1 };
+	for (int i = 0; i < n; i++) {
+		EXPECT_EQ(tab[i], tab_oczekiwana[i]);
+	}
 }
 
 TEST(Sortowanie_przez_scalanie, Sortowanie_z_duplikatami_ujemnymi_dodatnimi) {
-	;
+	int tab[] = { 5, 18, 4, 3, 5, 5, -1, -5, -1, -1, -18, 19, 5, -3, -27, -4, -4, 19, -5 };
+	int n = 19;
+	sortowanie sort;
+	sort.sortowanie_przez_scalanie(tab, 0, n - 1);
+	int tab_oczekiwana[] = { -27, -18, -5, -5, -4, -4, -3, -1, -1, -1, 3, 4, 5, 5, 5, 5, 18, 19, 19 };
+	for (int i = 0; i < n; i++) {
+		EXPECT_EQ(tab[i], tab_oczekiwana[i]);
+	}
 }
 
 TEST(Sortowanie_przez_scalanie, Sortowanie_tablicy_z_dwoma_elementami) {
-	;
+	int tab[] = { 7, -8 };
+	int n = 2;
+	sortowanie sort;
+	sort.sortowanie_przez_scalanie(tab, 0, n - 1);
+	int tab_oczekiwana[] = { -8, 7 };
+	for (int i = 0; i < n; i++) {
+		EXPECT_EQ(tab[i], tab_oczekiwana[i]);
+	}
 }
 
 TEST(Sortowanie_przez_scalanie, Sortowanie_tablicy_100_elementowej) {
