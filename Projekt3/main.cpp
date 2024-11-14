@@ -17,5 +17,22 @@ int main()
 		std::cout << tab[i] << " ";
 	}
 	std::cout << std::endl;
+
+	const int m = 100;   // <--- Test dzialania, przykladowa tablica 100 - elemntowa
+	int tab1[m];
+	sortowanie sort1;
+	for (int i = 0; i < m; i++) {
+		tab1[i] = rand() % 200 - 100;
+	}
+	std::cout << "Tablica przed sortowaniem: " << std::endl;
+	for (int i = 0; i < m; i++) {
+		std::cout << tab1[i] << " ";
+	}
+	std::cout << std::endl;
+	sort1.sortowanie_przez_scalanie(tab1, 0, m - 1);
+	std::cout << "Tablica po sortowaniu: " << std::endl;
+	for (int i = 0; i < m; i++) {
+		std::cout << tab1[i] << " ";
+	}
 	return 0;
 }

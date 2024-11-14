@@ -55,9 +55,12 @@ TEST(Sortowanie_przez_scalanie, Sortowanie_ujemne_i_dodatnie) {
 		EXPECT_EQ(tab[i], tab_oczekiwana[i]);
 	}
 }
-// dopisac metody !!!!!!!!!!!!!!!!!
+
 TEST(Sortowanie_przez_scalanie, Obsluga_pustej_tablicy) {
-	;
+	int* tab = nullptr;
+	int n = 0;
+	sortowanie sort;
+	EXPECT_NO_THROW(sort.sortowanie_przez_scalanie(tab, 0, n - 1));
 }
 
 TEST(Sortowanie_przez_scalanie, Tablica_jednoelementowa) {
@@ -113,9 +116,33 @@ TEST(Sortowanie_przez_scalanie, Sortowanie_tablicy_z_dwoma_elementami) {
 }
 
 TEST(Sortowanie_przez_scalanie, Sortowanie_tablicy_100_elementowej) {
-	;
+	const int n = 100;
+	int tab[n];
+	int tab_oczekiwana[n];
+	sortowanie sort;
+	for (int i = 0; i < n; i++) {
+		tab[i] = rand() % 200;
+		tab_oczekiwana[i] = tab[i];
+	}
+	sort.sortowanie_przez_scalanie(tab_oczekiwana, 0, n - 1);
+	sort.sortowanie_przez_scalanie(tab, 0, n - 1);
+	for (int i = 0; i < n; i++) {
+		EXPECT_EQ(tab[i], tab_oczekiwana[i]);
+	}
 }
 
-TEST(Sortowanie_przez_scalanie, Sortowanie_tablicy_100_elementowej_z_ujemnymi_dodatduplikatami) {
-	;
+TEST(Sortowanie_przez_scalanie, Sortowanie_tablicy_100_elementowej_z_ujemnymi_dodatnimi_duplikatami) {
+	const int n = 100;
+	int tab[n];
+	int tab_oczekiwana[n];
+	sortowanie sort;
+	for (int i = 0; i < n; i++) {
+		tab[i] = rand() % 200 - 100;
+		tab_oczekiwana[i] = tab[i];
+	}
+	sort.sortowanie_przez_scalanie(tab_oczekiwana, 0, n - 1);
+	sort.sortowanie_przez_scalanie(tab, 0, n - 1);
+	for (int i = 0; i < n; i++) {
+		EXPECT_EQ(tab[i], tab_oczekiwana[i]);
+	}
 }
