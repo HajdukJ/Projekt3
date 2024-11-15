@@ -18,7 +18,7 @@ int main()
 	}
 	std::cout << std::endl;
 
-	const int m = 100;   // <--- Test dzialania, przykladowa tablica 100 - elemntowa
+	const int m = 100;   // <--- Test dzialania, przykladowa tablica 100-elementowa
 	int tab1[m];
 	sortowanie sort1;
 	for (int i = 0; i < m; i++) {
